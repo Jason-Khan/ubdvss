@@ -261,7 +261,7 @@ class SegmentationMapMarkupReader(FileMarkupReader):
     в которых тип везде один и тот же (EAN13 -> 5)
     """
 
-    def __init__(self, path, net_config, images_folder='Image', markup_folder='Detection'):
+    def __init__(self, path, net_config, images_folder='../dataset/X/', markup_folder='../dataset/Y/'):
         super().__init__(path, net_config, images_folder=images_folder, markup_folder=markup_folder)
 
     def _is_markup_file_extension(self, ext):
