@@ -6,3 +6,4 @@ opencv-python>=3.4,<4.0
 keras==2.2.4
 shapely
 pillow
+tqdm
