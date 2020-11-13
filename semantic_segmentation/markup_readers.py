@@ -135,9 +135,10 @@ class FileMarkupReader(BaseMarkupReader):
             if not self._is_markup_file_extension(ext):
                 continue
             try:
-                image_filename = utils.find_corresponding_image(self.__images_folder_path, fname)
+                # image_filename = utils.find_corresponding_image(self.__images_folder_path, fname)
                 # markup = self._read_markup_from_file(os.path.join(self.__markup_folder_path, markup_filename))
                 # self.__markup[fname] = markup
+                image_filename = fname[:5] + fname[10:]
                 self.__markup_path[fname] = os.path.join(self.__markup_folder_path, markup_filename)
                 self.__full_filename[fname] = image_filename
                 n_successfull_reads += 1
@@ -170,7 +171,7 @@ class FileMarkupReader(BaseMarkupReader):
         :param image_name:
         :return: разметка местоположения слов в виде списка объектов типа ObjectMarkup
         """
-        return self.self._read_markup_from_file(self.__markup_path[image_name])
+        return self._read_markup_from_file(self.__markup_path[image_name])
 
     def get_image(self, image_name):
         """
