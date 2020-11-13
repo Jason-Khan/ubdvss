@@ -68,6 +68,7 @@ argparser.add_argument('--no_classification', '-nclf', action='store_true',
 argparser.add_argument('--min_detection_area', '-min_area', type=int, default=5,
                        help="found connected components with area less than this value will be filtered out")
 
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 def save_desctiption(args):
     with open(os.path.join(args.log_dir, 'description.txt'), 'w') as f:
