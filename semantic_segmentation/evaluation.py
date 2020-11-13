@@ -19,6 +19,13 @@ from shapely.geometry import Polygon
 from semantic_segmentation import utils
 
 
+def Polygon_wrapper(pts):
+    if len(pts) < 3:
+        return Polygon()
+    else:
+        return Polygon(pts)
+
+
 class FtMetrics:
     def __init__(self, all_type_names=None, compute_classification_metrics=False):
         """
@@ -369,7 +376,7 @@ class FtMetricsCalculator:
         """
         poly = Polygon()
         for box_to_add in boxes:
-            poly_to_add = Polygon(np.reshape(box_to_add, [-1, 2]))
+            poly_to_add = Polygon_wrapper(np.reshape(box_to_add, [-1, 2]))
             try:
                 poly = poly.union(poly_to_add)
             except Exception as e:
@@ -381,7 +388,7 @@ class FtMetricsCalculator:
         Объединяет многоугольники из группы в один новый полигон, и вычисляет iou
         """
         poly1 = self.__union_polygons(boxes_group)
-        poly2 = Polygon(np.reshape(box, [-1, 2]))
+        poly2 = Polygon_wrapper(np.reshape(box, [-1, 2]))
 
         intersection = poly1.intersection(poly2).area
         return self.__calc_iou(poly1.area, poly2.area, intersection)
@@ -408,9 +415,7 @@ class FtMetricsCalculator:
         """
         Вычисление площади многоугольника
         """
-        if len(box) < 8:
-            return 0
-        poly = Polygon(np.reshape(box, [-1, 2]))
+        poly = Polygon_wrapper(np.reshape(box, [-1, 2]))
         return poly.area
 
     @staticmethod
@@ -418,8 +423,8 @@ class FtMetricsCalculator:
         """
         Вычисление площади пересечения для двух многоугольников
         """
-        poly1 = Polygon(np.reshape(box1, [-1, 2]))
-        poly2 = Polygon(np.reshape(box2, [-1, 2]))
+        poly1 = Polygon_wrapper(np.reshape(box1, [-1, 2]))
+        poly2 = Polygon_wrapper(np.reshape(box2, [-1, 2]))
         return poly1.intersection(poly2).area
 
     @staticmethod
