@@ -39,13 +39,13 @@ class SegLinksImageAugmentation:
         """
         self.__aug_image, self.__aug_markup = (image, markup)
         self.__net_config = net_config
-        if len(markup) == 0:
-            # если разметки нет, то не будем делать никаких модификаций изображения
-            return
-        try:
-            self.__aug_image, self.__aug_markup = self.__augment_image(image, markup)
-        except Exception as e:
-            logging.error(str(e) + " error while augmenting")
+        # if len(markup) == 0:
+        #     # если разметки нет, то не будем делать никаких модификаций изображения
+        #     return
+        # try:
+        #     self.__aug_image, self.__aug_markup = self.__augment_image(image, markup)
+        # except Exception as e:
+        #     logging.error(str(e) + " error while augmenting")
 
     def __augment_image(self, image, markup):
         feed_original_probability = 0.1
