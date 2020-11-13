@@ -479,7 +479,9 @@ class DatasetMetricCalculator:
         classification_mode = self._net_config.is_classification_supported()
         # считаем целевые метрики
         for image_idx, (image_gt_objects, image_found_objects) in enumerate(zip(gt_objects, found_objects)):
-            assert len(image_gt_objects) > 0, "empty gt bboxes (it should contain at least one bbox)"
+            # assert len(image_gt_objects) > 0, "empty gt bboxes (it should contain at least one bbox)"
+            if len(image_gt_objects)  == 0:
+                continue
             image_gt_bboxes, image_gt_box_types = \
                 utils.extract_bboxes_and_object_types(image_gt_objects, self._net_config)
             image_pr_bboxes, image_pr_box_types = \
