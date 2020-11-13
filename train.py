@@ -154,7 +154,8 @@ def main():
         prepare_batch_size=args.prepare_batch_size,
         yield_incomplete_batches=True,
         n_workers=args.n_workers,
-        name="TrainDataGeneratorOnValidation"
+        name="TrainDataGeneratorOnValidation",
+        valid=False
     )
     val_generator = BatchGenerator(
         args.valid_markup_path,
@@ -165,7 +166,8 @@ def main():
         prepare_batch_size=args.prepare_batch_size,
         yield_incomplete_batches=True,
         n_workers=args.n_workers,
-        name="ValidDataGenerator"
+        name="ValidDataGenerator",
+        valid=True
     )
 
     callbacks = build_callbacks_list(args.log_dir, net_config, train_eval_generator, val_generator,

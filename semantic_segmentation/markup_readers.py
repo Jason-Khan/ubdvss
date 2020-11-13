@@ -9,6 +9,7 @@ import os
 import xml.etree.ElementTree
 from abc import abstractmethod
 from enum import Enum
+from tqdm import tqdm
 
 import numpy as np
 from PIL import Image
@@ -104,12 +105,13 @@ class FileMarkupReader(BaseMarkupReader):
     за исключением, возможно, расширения
     """
 
-    def __init__(self, path, net_config, images_folder='Image', markup_folder='Markup'):
+    def __init__(self, path, net_config, images_folder='Image', markup_folder='Markup', valid=False):
         super().__init__(path, net_config)
         self.__images_folder_path = os.path.join(path, images_folder)
         self.__markup_folder_path = os.path.join(path, markup_folder)
         self.__markup = dict()
         self.__full_filename = dict()
+        self.valid = valid
 
     def get_list_of_images(self):
         """
@@ -121,7 +123,12 @@ class FileMarkupReader(BaseMarkupReader):
         n_errors = 0
         n_successfull_reads = 0
         logging.info("Reading markup from {}".format(self.__images_folder_path))
-        for markup_filename in os.listdir(self.__markup_folder_path):
+        all_data = sorted(os.listdir(self.__markup_folder_path))
+        if not self.valid:
+            all_data = all_data[:len(all_data) // 10 * 8]
+        else:
+            all_data = all_data[len(all_data) // 10 * 8:len(all_data) // 10 * 9]
+        for markup_filename in tqdm(all_data):
             fname, ext = os.path.splitext(markup_filename)
             if not self._is_markup_file_extension(ext):
                 continue
@@ -261,8 +268,8 @@ class SegmentationMapMarkupReader(FileMarkupReader):
     в которых тип везде один и тот же (EAN13 -> 5)
     """
 
-    def __init__(self, path, net_config, images_folder='../dataset/X/', markup_folder='../dataset/Y/'):
-        super().__init__(path, net_config, images_folder=images_folder, markup_folder=markup_folder)
+    def __init__(self, path, valid, net_config, images_folder='../dataset/X/', markup_folder='../dataset/Y/'):
+        super().__init__(path, net_config, images_folder=images_folder, markup_folder=markup_folder, valid=valid)
 
     def _is_markup_file_extension(self, ext):
         return utils.is_image_extension(ext)

@@ -104,6 +104,8 @@ def find_corresponding_image(images_folder_path, fname_without_ext):
     :param fname_without_ext:
     :return:
     """
+    # remove 'mask' from markup
+    fname_without_ext = fname_without_ext[:5] + fname_without_ext[10:]
     for full_image_name in glob.glob(os.path.join(images_folder_path, fname_without_ext) + '.*'):
         image_ext = os.path.splitext(full_image_name)[1]
         if is_image_extension(image_ext):
