@@ -408,6 +408,7 @@ class FtMetricsCalculator:
         """
         Вычисление площади многоугольника
         """
+        print("debug", box)
         poly = Polygon(np.reshape(box, [-1, 2]))
         return poly.area
 
