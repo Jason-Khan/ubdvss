@@ -138,7 +138,7 @@ class FileMarkupReader(BaseMarkupReader):
                 # image_filename = utils.find_corresponding_image(self.__images_folder_path, fname)
                 # markup = self._read_markup_from_file(os.path.join(self.__markup_folder_path, markup_filename))
                 # self.__markup[fname] = markup
-                image_filename = fname[:5] + fname[10:]
+                image_filename = fname[:5] + fname[10:] + ext
                 self.__markup_path[fname] = os.path.join(self.__markup_folder_path, markup_filename)
                 self.__full_filename[fname] = image_filename
                 n_successfull_reads += 1
