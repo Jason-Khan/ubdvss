@@ -85,7 +85,8 @@ def main():
         use_augmentation=False,
         prepare_batch_size=args.prepare_batch_size,
         yield_incomplete_batches=True,
-        n_workers=args.n_workers
+        n_workers=args.n_workers,
+        valid=True
     )
 
     logging.info(f"Config: {net_config}")

@@ -105,7 +105,7 @@ class FileMarkupReader(BaseMarkupReader):
     за исключением, возможно, расширения
     """
 
-    def __init__(self, path, net_config, images_folder='Image', markup_folder='Markup', valid=False):
+    def __init__(self, path, net_config, images_folder='Image', markup_folder='Markup', valid=False, test=False):
         super().__init__(path, net_config)
         self.__images_folder_path = os.path.join(path, images_folder)
         self.__markup_folder_path = os.path.join(path, markup_folder)
@@ -113,6 +113,7 @@ class FileMarkupReader(BaseMarkupReader):
         self.__markup = dict()
         self.__full_filename = dict()
         self.valid = valid
+        self.test = test
 
     def get_list_of_images(self):
         """
@@ -130,6 +131,8 @@ class FileMarkupReader(BaseMarkupReader):
             all_data = all_data[:dataset_len // 10 * 8]
         else:
             all_data = all_data[dataset_len // 10 * 8 : dataset_len // 10 * 9]
+        if self.test:
+            all_data = all_data[dataset_len // 10 * 9 :]
         for markup_filename in tqdm(all_data):
             fname, ext = os.path.splitext(markup_filename)
             if not self._is_markup_file_extension(ext):
@@ -273,8 +276,8 @@ class SegmentationMapMarkupReader(FileMarkupReader):
     в которых тип везде один и тот же (EAN13 -> 5)
     """
 
-    def __init__(self, path, valid, net_config, images_folder='../dataset/ynet/X/', markup_folder='../dataset/ynet/Y/'):
-        super().__init__(path, net_config, images_folder=images_folder, markup_folder=markup_folder, valid=valid)
+    def __init__(self, path, valid, test, net_config, images_folder='../dataset/ynet/X/', markup_folder='../dataset/ynet/Y/'):
+        super().__init__(path, net_config, images_folder=images_folder, markup_folder=markup_folder, valid=valid, test=test)
 
     def _is_markup_file_extension(self, ext):
         return utils.is_image_extension(ext)

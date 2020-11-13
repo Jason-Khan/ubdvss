@@ -61,7 +61,7 @@ class BatchGenerator:
 
     def __init__(self, path, batch_size, markup_type, net_config,
                  use_augmentation=False,
-                 n_workers=3, yield_incomplete_batches=True, prepare_batch_size=1000, name="TrainGenerator", valid=False):
+                 n_workers=3, yield_incomplete_batches=True, prepare_batch_size=1000, name="TrainGenerator", valid=False, test=False):
         """
         :param path: путь до разметки
         :param batch_size: размер одного батча
@@ -85,7 +85,7 @@ class BatchGenerator:
 
         assert markup_type in supported_markup_types, \
             f"now we support only one from {supported_markup_types.keys()} as markup_type"
-        self._reader = supported_markup_types[markup_type](path, valid, net_config)
+        self._reader = supported_markup_types[markup_type](path, valid, test, net_config)
         self._reader.read_markup()
         self._image_names = self._reader.get_list_of_images()
 
