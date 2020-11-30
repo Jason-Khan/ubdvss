@@ -218,8 +218,8 @@ class ResultSaver:
         """
         markup_str = ''
         for markup in markups:
-            print("debug")
-            print(len([int(xy) for xy in markup.bbox]))
+            if len(markup.bbox) < 8:
+                continue
             markup_str += '{:d},{:d},{:d},{:d},{:d},{:d},{:d},{:d},""'.format(
                 *[int(xy) for xy in markup.bbox])
             if isinstance(markup, ClassifiedObjectMarkup):
