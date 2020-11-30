@@ -126,7 +126,7 @@ class FileMarkupReader(BaseMarkupReader):
         n_successfull_reads = 0
         logging.info("Reading markup from {}".format(self.__images_folder_path))
         all_data = sorted(os.listdir(self.__markup_folder_path))
-        dataset_len = min(len(all_data), 30000)
+        dataset_len = min(len(all_data), 40000)
         if not self.valid:
             all_data = all_data[:dataset_len // 10 * 8]
         else:

@@ -5,4 +5,4 @@ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 
 sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 
-python train.py -t . -v . -mt BarcodeSegmap
+python train.py -t . -v . -mt BarcodeSegmap -e 70
