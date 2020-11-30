@@ -49,8 +49,6 @@ def pillow_grey_fomarray(img, dsize=None):
 
 
 def get_contours_and_boxes(seg_map, min_area=10):
-    print(len(cv2.findContours(np.array(seg_map, dtype=np.uint8),
-                                  mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)))
     _, cnts, _ = cv2.findContours(np.array(seg_map, dtype=np.uint8),
                                   mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)
 
