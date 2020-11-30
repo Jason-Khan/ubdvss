@@ -1,9 +1,10 @@
 imgaug
-tensorflow==1.15
+tensorflow==1.14
 numpy
 pandas
 opencv-python>=3.4,<4.0
-keras==2.2.4
+keras==2.1.3
 shapely
 pillow
 tqdm
+h5py==2.10.0
