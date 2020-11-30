@@ -185,6 +185,9 @@ class ResultSaver:
         :param meta_infos:
         :return:
         """
+        print("debug")
+        print(len(meta_infos))
+        print(len(gt_objects))
         for i, meta_info in enumerate(meta_infos):
             ResultSaver.save_markup_csv(
                 filename=os.path.join(self._save_gt_dir, meta_info.filename + '.txt'),
