@@ -132,9 +132,7 @@ class FileMarkupReader(BaseMarkupReader):
         else:
             all_data = all_data[dataset_len // 10 * 8 : dataset_len // 10 * 9]
         if self.test:
-            print("TESTING!!!")
-            print(len(all_data))
-            all_data = all_data[90000:100000]
+            all_data = sorted(os.listdir(self.__markup_folder_path))[90000:100000]
         for markup_filename in tqdm(all_data):
             fname, ext = os.path.splitext(markup_filename)
             if not self._is_markup_file_extension(ext):
