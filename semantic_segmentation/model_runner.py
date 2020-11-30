@@ -185,9 +185,6 @@ class ResultSaver:
         :param meta_infos:
         :return:
         """
-        print("debug")
-        print(len(meta_infos))
-        print(len(gt_objects))
         for i, meta_info in enumerate(meta_infos):
             ResultSaver.save_markup_csv(
                 filename=os.path.join(self._save_gt_dir, meta_info.filename + '.txt'),
@@ -221,6 +218,8 @@ class ResultSaver:
         """
         markup_str = ''
         for markup in markups:
+            print("debug")
+            print(len([int(xy) for xy in markup.bbox]))
             markup_str += '{:d},{:d},{:d},{:d},{:d},{:d},{:d},{:d},""'.format(
                 *[int(xy) for xy in markup.bbox])
             if isinstance(markup, ClassifiedObjectMarkup):
